@@ -1,0 +1,140 @@
+html, body {
+    position: relative;
+    height: 100%;
+}
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 50px;
+    font-weight:800;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.fancy_button {
+  display: block;
+  background: #62869b;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font: 1.2em/12px Verdana, Arial, Helvetica, sans-serif;
+  color: #fff;
+  text-decoration: none;
+  -webkit-border-radius: 15px;
+  -khtml-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.fancy_button:hover {
+  background: #3e5a6b;
+}
+
+
+.start-background{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #89bff5;
+    background: linear-gradient(#89bff5, #fa9ec9);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0, #89bff5), color-stop(1, #fa9ec9));
+    background: -webkit-linear-gradient(left, #89bff5 0%, #fa9ec9 100%);
+    background: -moz-linear-gradient(left, #89bff5 0%, #fa9ec9 100%);
+    background: linear-gradient(left, #89bff5 0%, #fa9ec9 100%);
+}
+
+h1{
+  text-shadow: 1px 1px 2px #ccc, 0 0 25px #ddd, 0 0 5px white;
+}
+
+.end{
+  text-align: center;
+  background-color: #FFD2E7;
+  background: linear-gradient(#FFD2E7, #F791C4);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFD2E7), color-stop(1, #F791C4));
+  background: -webkit-linear-gradient(top, #FFD2E7 0%, #F791C4 100%);
+  background: -moz-linear-gradient(top, #FFD2E7 0%, #F791C4 100%);
+  background: linear-gradient(top, #FFD2E7 0%, #F791C4 100%);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0; overflow-y:scroll;
+}
+
+.end h1{
+  font-size: 35px;
+}
+
+.start-button{
+  background: #fff;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font: 1.2em/12px Verdana, Arial, Helvetica, sans-serif;
+  color: 000;
+  text-decoration: none;
+  -webkit-border-radius: 15px;
+  -khtml-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.instruction{
+  background: #fff;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  font: 1.2em/12px Verdana, Arial, Helvetica, sans-serif;
+  color: 000;
+  text-decoration: none;
+  -webkit-border-radius: 15px;
+  -khtml-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.disabled{
+  color: #222;
+  background: #DDD;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  transition: border 0.3s;
+}
+input[type="text"]:focus,
+input[type="text"].focus {
+  border: solid 5px #969696;
+}
+p{
+  padding-left:25px;
+  padding-right:25px;
+  font-size: 1.2em;
+}

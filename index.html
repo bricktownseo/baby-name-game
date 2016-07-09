@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css"> -->
+    <link rel="stylesheet" href="bower_components/Swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.css">
+    <link rel="stylesheet" href="css/game.css">
+    <style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+    </style>
+    <meta property="og:url"           content="http://www.phillipswitzer.com/" />
+  	<meta property="og:type"          content="website" />
+  	<meta property="og:title"         content="Baby Switzer Name Game" />
+  	<meta property="og:description"   content="A fun game to reveal both the gender and name of our baby." />
+  	<meta property="og:image"         content="http://www.phillipswitzer.com/img/guess-wide.jpg" />
+</head>
+    <body ng-app="BabyNameApp" ng-controller="NameCtrl" ng-cloak>
+      <div ng-if="stage.now=='hof'" style="overflow-y:scroll;" class="start-background">
+        Total Guesses: {{stats.length}}
+        <table style="width: 100%;">
+          <tr>
+            <th>Name</th><th>Guesses</th><th>Time (seconds)</th>
+          </tr>
+          <tr ng-repeat="stat in stats">
+            <td align="left">{{$index+1}}) {{stat.name}}</td>
+            <td align="right">{{stat.guesses}}</td>
+            <td align="right">{{stat.time | seconds}}</td>
+          </tr>
+        </table>
+        <button ng-click="stage.now='start'" class="start-button">Back</button>
+      </div>
+      <div ng-if="stage.now=='start'" style="overflow-y:scroll;" class="start-background">
+        <p>
+          <img src="img/guess-square.jpg" style="width:100%; max-width:600px;" align="top">
+        </p>
+        <input type="text" ng-model="stage.name" placeholder="Enter Your Name" ng-hide="stage.played" style="margin-top:20px; margin-bottom:20px;"><br/>
+        <button ng-click="instructions()" ng-show="stage.name.length > 0 && !stage.played" class="start-button">Begin</button>
+        <button ng-show="!stage.name && !stage.played" class="start-button disabled">Begin</button>
+        <h3 ng-hide="stage.played">OR</h3>
+        <button ng-click="hallOfFame()" class="start-button">"Hall of Game"</button>
+      </div>
+      <div ng-show="stage.now=='instructions'" class="start-background" style="overflow-y:scroll;">
+        <h1>Instructions</h1>
+        <p>
+          Welcome to the gender and name reveal for our baby! We are providing you with a list of our top three
+          choices for first and middle names for both a baby boy and a baby girl. That means you'll have twelve
+          names to sort through to determine our baby's newly given name. It's like a giant mix 'n match! Swipe up
+          or down on the first row to choose a first name, do the same on the bottom row to find a fitting middle
+          name, then click the button to see if you're you've guessed the correct combination. If not, keep guessing.
+          But hurry, you're being timed!
+        </p>
+        <p>
+          <img src="img/screenshot.png" width="50%" align="left" style="margin:0 25%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"/>
+          <button ng-click="startGame()" style="margin-top:10px;" class="instruction">Start Game</button>
+        </p>
+      </div>
+      <div ng-show="stage.now=='game'">
+        <div style="position:fixed; top:0; left:0; right:0; bottom: 66%;">
+          <div class="swiper-container first-name">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div style="position:fixed; top:33%; left:0; right:0; bottom: 33%;">
+          <div class="swiper-container middle-name">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper"></div>
+              <div class="swiper-pagination"></div>
+          </div>
+        </div>
+        <div style="position:fixed; top:66%; left:0; right:0; bottom: 0;">
+          <div class="swiper-container">
+            <button class="fancy_button" style="position: fixed; top: 80%; left: 50%; margin-left: -100px;" ng-click="checkNames();">Check Your Guess</button>
+            <h3 style="position:fixed; bottom:0; right:0;"><timer interval="100" autostart="false" /></h3>
+          </div>
+        </div>
+      </div>
+    <div ng-if="stage.now=='end'" class="end">
+      <p>
+        <img src="img/answer-square.jpg" style="width:100%; max-width:600px;" align="top">
+      </p>
+      <h2>Thank you for playing {{stage.name}}! Please help us in welcoming TJ to our family.</h2>
+      <h3>You completed in {{stage.time}}</h3>
+      <h3>with {{stage.guesses}} guesses.</h3>
+      <p><button ng-click="hallOfFame()" style="color:#121212;">Visit "Hall of Game"</button></p>
+    </div>
+    <div>
+      <audio><source src="audio/answer.mp3" type="audio/mpeg"></audio>
+      <audio><source src="audio/buzzer.mp3" type="audio/mpeg"></audio>
+      <audio><source src="audio/pacman.mp3" type="audio/mpeg"></audio>
+      <audio><source src="audio/swipe.mp3" type="audio/mpeg"></audio>
+      <audio><source src="audio/win.mp3" type="audio/mpeg"></audio>
+    </div>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-audio/angular.audio.js"></script>
+    <script src="bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
+    <script src="bower_components/humanize-duration/humanize-duration.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+    <script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+    <!-- <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script> -->
+
+    <script src="bower_components/Swiper/dist/js/swiper.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>
